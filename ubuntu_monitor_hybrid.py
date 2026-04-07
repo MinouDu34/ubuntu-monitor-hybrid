@@ -34,14 +34,14 @@ class Terminal:
     @staticmethod
     def color_val(val, low=50, high=80, inverse=False, unit="%"):
         """Returns a formatted string with conditional coloring (Green, Yellow, Red)."""
-        if val is None: return f"{Terminal.W}--{unit}{Terminal.END}"
+        if val is None: return f"{Terminal.W}--.-{unit}{Terminal.END}"
         col = Terminal.G
         # inverse=True for battery percentage (low = red)
         if inverse: 
             col = Terminal.R if val <= low else (Terminal.Y if val <= high else Terminal.G)
         else: 
             col = Terminal.R if val >= high else (Terminal.Y if val >= low else Terminal.G)
-        v_str = f"{val}" if isinstance(val, int) else f"{val:.1f}"
+        v_str = f"{val}" if isinstance(val, int) else f"{val:4.1f}"
         return f"{col}{v_str}{unit}{Terminal.END}"
 
     @staticmethod
